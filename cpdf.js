@@ -4,6 +4,7 @@ module.exports = function (RED) {
 
     function CoherentPdfNode(config) {
         RED.nodes.createNode(this, config);
+        const node = this;
 
         this.squeeze = config.squeeze || false;
 
@@ -19,8 +20,6 @@ module.exports = function (RED) {
         } else if (process.platform === 'linux') {
             cpdf = __dirname + '/cpdf-binaries/Linux-Intel-64bit/cpdf';
         }
-
-        const node = this;
 
         this.on('input', async function (msg, _send, done) {
             const pages = msg.pages.map(function (page) {
